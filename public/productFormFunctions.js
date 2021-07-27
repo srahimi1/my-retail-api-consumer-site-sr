@@ -56,7 +56,7 @@ function getProductID() {
 } // end getProductID()
 
 function getBase() {
-    var base = "https://my-retail-api-endpoint-rails-sr.herokuapp.com";
+    var base = "https://my-retail-api-endpoint-rail-sr.herokuapp.com";
     if ((javaRadioButton != undefined) && (javaRadioButton != null) && (javaRadioButton.checked)) {
         base = "https://my-retail-api-endpoint-java-sr.herokuapp.com";
     } // end if
