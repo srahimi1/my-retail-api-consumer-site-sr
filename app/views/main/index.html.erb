@@ -1,0 +1,67 @@
+<!-- Modal -->
+<div class="modal fade" id="productModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalTitle">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" id="modalBody">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>myRetail API Service Customer Site</h2>
+    </div>
+
+    <div class="row g-5">
+      <%= form_with url: "/products/", authenticity_token: form_authenticity_token, id: "api-form", html: {class: "needs-validation", novalidate: "novalidate"}, method: :post do |form| %>
+      <div class="col-md-7 col-lg-8">
+        <div class="col-12">
+          <div class="form-check">
+            <%= form.radio_button :radioButton, "Java", class: "form-check-input", checked: "checked" %>
+            <%= form.label :radioButton_java, "Java", class: "form-check-label mb-1" %>
+          </div>
+          <div class="form-check">
+            <%= form.radio_button :radioButton, "Rails", class: "form-check-input" %>
+            <%= form.label :radioButton_rails, "Rails", class: "form-check-label mb-3" %>
+          </div>
+        </div>
+
+
+        <h4 class="mb-3">Product Information</h4>
+          <div id="errorDiv" class="col-12"></div>
+          <div class="row g-3">
+            <div class="col-12">
+	          <label for="productIDDropdown" class="form-label">Select Product ID</label>
+	          <%= form.select :productIDDropdown, ["Product ID...","13860428", "54456119", "13264003", "12954218"], {selected: "Product ID..."}, {class: "form-select"}%>
+	         </div>
+
+	        <div class="col-12 text-center">
+	        	<p>- or -</p>
+	        </div>
+
+
+            <div class="col-12" style="margin-top: -0.3em;">
+              <label for="productIDTextField" class="form-label">Enter Product ID</label>
+              <%= form.text_field :productIDTextField, class: "form-control", value: "", placeholder: "" %>
+            </div>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="button" onclick="getProductDetails(null);">Get Product Details</button>
+      </div>
+    </div>
+    <% end %>
+    </div>
+  </main>
+</div>
