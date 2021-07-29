@@ -26,14 +26,17 @@ function getProductDetails(productID) {
     if ((productID == undefined) || (productID == null)) productID = getProductID();
     if (productID) {
         xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {        
-                var response = this.responseText;
-                var responseLower = response.toLowerCase().substr(0,4);
-                if (responseLower == "pass") { 
-                    showModal(response);
-                } else if (responseLower == "fail") {
-                    showErrorMsg(response.substr(5));
-                } // end if ... else if
+            if (this.readyState == 4 && this.status == 200) {
+                try {
+                    parsedJSON = JSON.parse(this.responseText);
+                    if (parsedJSON.errorMsg == "") { 
+                        showModal(parsedJSON);
+                    } else {
+                        showErrorMsg(parsedJSON.errorMsg);
+                    } // end if ... else if
+                } catch (e) {
+                    showErrorMsg(e.message);
+                }// end try catch
             } // end if (this.readyState == 4 && this.status == 200)
         } // end xhr.onreadystatechange
         xhr.open("GET", getBase()+"/api/v1/products/"+productID);
@@ -67,8 +70,7 @@ function showErrorMsg(errorMsg) {
     errorDiv.innerHTML = errorContentPart1 + errorContentPart2 + errorContentPart3 + errorMsg + errorContentPart4;
 } // end showError()
 
-function showModal(response) {
-    parsedJSON = JSON.parse(response.substr(5));
+function showModal(parsedJSON) {
     modalTitle.innerHTML = parsedJSON["product_name"];
     var image = "<p class='col-12 text-center'><img src='" + parsedJSON["product_image_url"] + "' width='150' height='150'></p>";
     var errorLine = "<div id='productDetailsErrorDiv' class='col-12'></div>"
