@@ -1,5 +1,5 @@
 // Global variables
-var productIDDropdown, productIDTextField, xhr, modal, productModal, modalTitle, modalBody, parsedJSON, errorDiv, errorContentPart1, errorContentPart2, errorContentPart3, errorContentPart4, javaRadioButton, initialized = false;
+var productIDDropdown, productIDTextField, xhr, modal, productModal, modalTitle, modalBody, parsedJSON, errorDiv, errorContentPart1, errorContentPart2, errorContentPart3, errorContentPart4, javaRadioButton, spinner, initialized = false;
 
 function init() {
     productIDDropdown = document.getElementById("productIDDropdown");
@@ -15,6 +15,7 @@ function init() {
     errorContentPart3 = "<strong>Error: </strong> ";
     errorContentPart4 = "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     javaRadioButton = document.getElementById("radioButton_java");
+    spinner = document.getElementById("spinner1");
     initialized = true;
 } // end init()
 
@@ -27,6 +28,7 @@ function getProductDetails(productID) {
     if (productID) {
         xhr.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+                spinner.style.display = "none";
                 try {
                     parsedJSON = JSON.parse(this.responseText);
                     if (parsedJSON.errorMsg == "") { 
@@ -41,6 +43,7 @@ function getProductDetails(productID) {
         } // end xhr.onreadystatechange
         xhr.open("GET", getBase()+"/api/v1/products/"+productID);
         xhr.send();
+        spinner.style.display = "block";
     } else {
         showErrorMsg("For product details, a product ID must be entered or chosen from the dropdown list.");
     }// end if else
