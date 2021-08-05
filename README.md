@@ -13,4 +13,4 @@ Using this site, a user can:
 
 * Update the price and/or currency type of the selected product in the modal that appears after a back-end response is received for a product. A url parameter labeled 'data' and containing a string formatted JSON object is sent via a 'PUT' request to the same endpoint as the above mentioned 'GET' request, '/api/v1/products/:id', where ':id' is the id of the product to update.
 
-The rails back-end produces the server-side rendered HTML page of this site and JavaScript, in a file titled '[productForFunction.js](public/productFormFunctions.js)' in the 'public' folder under the root directory, handles the user interactions and communications with the back-ends.
+The rails back-end produces the server-side rendered HTML page of this site and JavaScript, in a file titled '[productFormFunction.js](public/productFormFunctions.js)' in the 'public' folder under the root directory, handles the user interactions and communications with the back-ends.
